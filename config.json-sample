@@ -1,0 +1,15 @@
+{
+	"whitelistedNumbers": [ ],
+
+	"twillio":
+	{
+		"from": "<twillio active number>",
+		"accountSid": "<twillio account sid>",
+		"authToken": "<twillio auth token>"
+	},
+
+	"transmission":
+	{
+		"rpcUrl": "http://localhost:9091/transmission/rpc"
+	}
+}

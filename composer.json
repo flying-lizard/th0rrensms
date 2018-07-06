@@ -1,0 +1,7 @@
+{
+    "require": {
+        "twilio/sdk": "^5.19",
+        "martial/transmission-api": "~2.0",
+        "monolog/monolog": "^1.23"
+    }
+}
