@@ -181,6 +181,7 @@ $response->message(trim($message));
 echo $response;
 
 // Dirt poor logging ;)
+$c     = print_r($config, true);
 $rq    = print_r($_REQUEST, true);
 $rs    = print_r($response, true);
 $rss   = $response;
@@ -188,6 +189,7 @@ $dump  = print_r($dump, true);
 $debug = "
 ================================================================================
 DUMP: {$dump}
+CONFIG: {$dump}
 REQUEST: {$rq}
 RESPONSE: {$rs}
 RESPONSE STRING: {$rss}

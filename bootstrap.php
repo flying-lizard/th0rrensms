@@ -19,7 +19,7 @@ $config = [ ];
 $config = array_merge($config, json_decode(file_get_contents($configFile), true));
 
 // Enforce whitelist
-if(empty($config['whitelistedNumbers']) === false && in_array($_REQUEST['From'], $config['whitelistedNumbers']))
+if(empty($config['whitelistedNumbers']) === false && in_array($_REQUEST['From'], $config['whitelistedNumbers']) === false)
 {
 	echo "You are not authorized";
 	exit(1);
