@@ -18,7 +18,7 @@ $arguments = explode(' ', substr(trim($_REQUEST['Body']), 0, 1024));
 $arguments[0] = strtolower($arguments[0]);
 $arguments[1] = strtolower(@$arguments[1]);
 
-// Check for magnet link
+// Check for magnet link or url
 if(substr($_REQUEST['Body'], 0, 7) === 'magnet:' || substr($_REQUEST['Body'], 0, 4) === 'http')
 {
 	// iza magnet, start

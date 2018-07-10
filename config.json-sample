@@ -3,9 +3,10 @@
 
 	"twillio":
 	{
-		"from": "<twillio active number>",
-		"accountSid": "<twillio account sid>",
-		"authToken": "<twillio auth token>"
+		"from": "<active number>",
+		"phoneNumberSid": "<phone number sid>",
+		"accountSid": "<account sid>",
+		"authToken": "<auth token>"
 	},
 
 	"transmission":
