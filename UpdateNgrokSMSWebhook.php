@@ -8,6 +8,7 @@
 require 'bootstrap.php';
 
 $lastNgrokUrl = '';
+$twillioSubmitedBaseNgrokUrlLockFile = __DIR__ . '/' . $config['twillioSubmitedBaseNgrokUrlLockFile'];
 
 // Get current ngrok url
 $json = @file_get_contents($config['ngrok']['listTunnelsApiEndpoint']);
@@ -16,23 +17,22 @@ $json = @file_get_contents($config['ngrok']['listTunnelsApiEndpoint']);
 if(empty($json))
 {
 	echo "error: ngrok api not reachable at {$config['ngrok']['listTunnelsApiEndpoint']}, is it even running?\n";
-	exit(1);
+	exit(2);
 }
 
 $tunnels  = json_decode($json);
 $ngrokUrl = findTunnel($tunnels);
 
-if(is_readable($config['twillioSubmitedBaseNgrokUrl']))
+if(is_readable($twillioSubmitedBaseNgrokUrlLockFile))
 {
 	// Get last set ngrok url
-	$lastNgrokUrl = file_get_contents($config['twillioSubmitedBaseNgrokUrl']);
+	$lastNgrokUrl = file_get_contents($twillioSubmitedBaseNgrokUrlLockFile);
 }
 
 // Update Twilio webhook if ngrok url changed
 if(empty($ngrokUrl) === false && $lastNgrokUrl !== $ngrokUrl)
 {
-	$twilio = new Twilio\Rest\Client($config['twillio']['accountSid'], $config['twillio']['authToken']);
-
+	$twilio     = new Twilio\Rest\Client($config['twillio']['accountSid'], $config['twillio']['authToken']);
 	$webhookUrl = "{$ngrokUrl}/{$config['basePath']}/reply.php";
 
 	// Send new webhook over to Twilio
@@ -43,7 +43,7 @@ if(empty($ngrokUrl) === false && $lastNgrokUrl !== $ngrokUrl)
 		]);
 
 	// Update last base ngrok url
-	file_put_contents($config['twillioSubmitedBaseNgrokUrl'], $ngrokUrl);
+	file_put_contents($twillioSubmitedBaseNgrokUrlLockFile, $ngrokUrl);
 
 	echo "updated sms webook: {$webhookUrl}\n";
 }

@@ -7,11 +7,11 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Setup config
-$configFile = './config.json';
+$configFile = __DIR__ . '/config.json';
 
 if(is_readable($configFile) === false)
 {
-	echo "config.json not defined";
+	echo "config.json not defined\n";
 	exit(1);
 }
 
@@ -27,7 +27,7 @@ $config =
 		'listTunnelsApiEndpoint' => 'http://localhost:4040/api/tunnels'
 	],
 
-	'twillioSubmitedBaseNgrokUrl' => './lastNgrokUrl'
+	'twillioSubmitedBaseNgrokUrlLockFile' => 'lastNgrokUrl'
 ];
 
 $config = array_merge($config, json_decode(file_get_contents($configFile), true));
